@@ -1,28 +1,37 @@
 # johnnydeez
 import requests
+import json
 
-#method to get the repos
-def publicRepos(name1):
-    print ("username: " + name1);
-    url = "https://api.github.com/users/" + name1 + "/repos";
-    print ("URL: " + url)
-    r = requests.get(url)
-    return r.json()
+class apiRequestRepo:
+    def __init__(self, username):
+        self.username = username
+    
+    #method to get the repos
+    def publicRepos(self):
+        print ("username: " + self.username)
+        url = "https://api.github.com/users/" + self.username + "/repos"
+        print ("URL: " + url)
+        r = requests.get(url)
+        jsonString = r.json()
+        #creating a list to store the repoNames
+        publicReposName = []
+        #Adding the repos name in the list
+        for rep in jsonString:
+            if rep.has_key('name'):
+                publicReposName.append(rep['name'])    
+        return publicReposName
 
-#method to print the repos
-def printPublicRepo(x):
-    print (".............")
-    print ("All the public repository are::")
-    for d in x:
-        for key, value in d.iteritems():
-             if key == "name":
-                print value;
-
+    #method to print the repos
+    def printPublicRepo(self,x):
+        print (".............")
+        print ("All the public repository are::")
+        for i in range(len(x)):
+            print (x[i])
+    
 #initialization with the main
 if __name__ == "__main__":
-    # get the username and display in url used
-    name = raw_input("enter your username:")
+    request1 = apiRequestRepo("johnnydeez")
     #get the repos
-    data = publicRepos(name)
+    data = request1.publicRepos()
     #print the repos
-    printPublicRepo(data)
+    request1.printPublicRepo(data)

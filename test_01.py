@@ -3,24 +3,29 @@
 # johnnydeez
 # vim
 import pytest
-from script import publicRepos
 import json
 
-def test_01():
-    print(".........Test_01.............")
-    name = raw_input("enter your username:")
-    repoName = raw_input("Enter the repos name to test for: ")
+@pytest.fixture
+def data():
+    from script import apiRequestRepo
+    obj1 = apiRequestRepo('johnnydeez')
+    #getting the public repo names
+    data = obj1.publicRepos()
+    return data
+
+def test_01(data):
+    print(".........Test_03.............")
+    #enter repo name to be search for
+    repoName = 'ffmpegthumbnailer'
+    #test script
     print("Test is searching for "+repoName+"...")
-    
-    data = publicRepos(name)
-    
-    status = False      #status set to true if repo is found
-    
-    for rep in data:
-        if rep.has_key('name'):
-            if rep['name'] == repoName:
-                status = True
-                print ("found " + rep['name'])
-                break
-        
-    assert status == True   
+    assert repoName in data
+
+
+def test_02(data):
+    print(".........Test_04.............")
+    #enter repo name to be search for
+    repoName = 'vim'
+    #test script
+    print("Test is searching for "+repoName+"...")
+    assert repoName in data
