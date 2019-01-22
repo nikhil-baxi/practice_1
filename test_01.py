@@ -14,7 +14,7 @@ def data():
     return data
 
 def test_01(data):
-    print(".........Test_03.............")
+    print(".........Test_01.............")
     #enter repo name to be search for
     repoName = 'ffmpegthumbnailer'
     #test script
@@ -23,7 +23,7 @@ def test_01(data):
 
 
 def test_02(data):
-    print(".........Test_04.............")
+    print(".........Test_02.............")
     #enter repo name to be search for
     repoName = 'vim'
     #test script
