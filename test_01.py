@@ -1,31 +1,31 @@
 # use this inputs
-# to run the test:- pytest -s -q
+# to run the test:- pytest -v -s
 # johnnydeez
 # vim
+
 import pytest
 import json
+from script import apiRequestRepo
 
 @pytest.fixture
-def data():
-    from script import apiRequestRepo
-    obj1 = apiRequestRepo('johnnydeez')
+def pubRepoList():
+    requestPubRepos = apiRequestRepo('johnnydeez')
     #getting the public repo names
-    data = obj1.publicRepos()
-    return data
+    getPubRepoList = requestPubRepos.publicRepos()
+    return getPubRepoList
 
-def test_01(data):
-    print(".........Test_01.............")
-    #enter repo name to be search for
+
+def test_checkForRepo_01(pubRepoList):
+    #repo name to be search for
     repoName = 'ffmpegthumbnailer'
+    print(".........Checking for "+ repoName +" repository.............")
     #test script
-    print("Test is searching for "+repoName+"...")
-    assert repoName in data
+    assert repoName in pubRepoList
 
 
-def test_02(data):
-    print(".........Test_02.............")
-    #enter repo name to be search for
+def test_checkForRepo_02(pubRepoList):
+    #repo name to be search for
     repoName = 'vim'
+    print(".........Checking for "+ repoName +" repository.............")
     #test script
-    print("Test is searching for "+repoName+"...")
-    assert repoName in data
+    assert repoName in pubRepoList

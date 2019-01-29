@@ -22,16 +22,16 @@ class apiRequestRepo:
         return publicReposName
 
     #method to print the repos
-    def printPublicRepo(self,x):
+    def printPublicRepo(self,listOfRepos):
         print (".............")
         print ("All the public repository are::")
-        for i in range(len(x)):
-            print (x[i])
+        for i in range(len(listOfRepos)):
+            print (listOfRepos[i])
     
 #initialization with the main
 if __name__ == "__main__":
-    request1 = apiRequestRepo("johnnydeez")
+    requestPubRepos = apiRequestRepo("johnnydeez")
     #get the repos
-    data = request1.publicRepos()
+    getPubRepoList = requestPubRepos.publicRepos()
     #print the repos
-    request1.printPublicRepo(data)
+    requestPubRepos.printPublicRepo(getPubRepoList)
